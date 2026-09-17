@@ -1,5 +1,7 @@
 # mini-tcp
 
+**English** | [简体中文](README.zh-CN.md)
+
 A TCP/IP stack written from scratch in pure Python — no dependencies, no
 `socket` module, no `asyncio`, no C extensions. Ethernet, ARP, IPv4, ICMP, UDP
 and TCP are all implemented in this repository, byte by byte, and the result
