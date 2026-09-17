@@ -1,0 +1,74 @@
+[build-system]
+requires = ["setuptools>=61"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "minitcp"
+version = "0.1.0"
+description = "A TCP/IP stack written from scratch in pure Python: Ethernet, ARP, IPv4, ICMP, UDP and TCP with zero dependencies"
+readme = "README.md"
+requires-python = ">=3.10"
+license = { file = "LICENSE" }
+keywords = [
+    "tcp",
+    "ip",
+    "networking",
+    "protocol",
+    "stack",
+    "education",
+    "from-scratch",
+    "ethernet",
+    "arp",
+    "ipv4",
+    "udp",
+    "icmp",
+]
+classifiers = [
+    "Development Status :: 4 - Beta",
+    "Intended Audience :: Developers",
+    "Intended Audience :: Education",
+    "License :: OSI Approved :: MIT License",
+    "Operating System :: OS Independent",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Programming Language :: Python :: 3.13",
+    "Topic :: Education",
+    "Topic :: System :: Networking",
+    "Typing :: Typed",
+]
+# Deliberately empty.  The whole point of this project is that it needs
+# nothing, so there is nothing to install and nothing to pin.
+dependencies = []
+
+[project.optional-dependencies]
+dev = []
+
+[project.urls]
+Homepage = "https://github.com/ZTLNB/mini-tcp"
+Repository = "https://github.com/ZTLNB/mini-tcp"
+Issues = "https://github.com/ZTLNB/mini-tcp/issues"
+
+[tool.setuptools]
+packages = [
+    "minitcp",
+    "minitcp.util",
+    "minitcp.link",
+    "minitcp.net",
+    "minitcp.net.tcp",
+]
+
+[tool.ruff]
+line-length = 96
+target-version = "py310"
+
+[tool.ruff.lint]
+select = ["E", "F", "W", "I", "N", "UP", "B", "C4", "SIM", "RUF"]
+ignore = [
+    # Long explanatory comments and docstrings are the point of this project.
+    "E501",
+]
+
+[tool.ruff.lint.per-file-ignores]
+"tests/*" = ["N802"]

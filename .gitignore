@@ -1,0 +1,46 @@
+# Byte-compiled / optimised / DLL files
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Packaging and distribution
+build/
+dist/
+*.egg-info/
+.eggs/
+wheels/
+
+# Test and coverage output
+.pytest_cache/
+.coverage
+.coverage.*
+htmlcov/
+.tox/
+.nox/
+
+# Virtual environments
+.venv/
+venv/
+env/
+ENV/
+
+# Type-checker and linter caches
+.mypy_cache/
+.ruff_cache/
+.dmypy.json
+
+# Editors
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# Capture files produced by the examples
+*.pcap
+*.pcapng
+
+# OS noise
+.DS_Store
+Thumbs.db
+desktop.ini

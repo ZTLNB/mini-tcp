@@ -1,0 +1,21 @@
+# Normalise line endings in the repository, so that a checkout on Windows
+# does not rewrite every file and produce a diff full of noise.
+* text=auto eol=lf
+
+# Windows-only files keep CRLF if any are ever added.
+*.bat text eol=crlf
+*.cmd text eol=crlf
+*.ps1 text eol=crlf
+
+# Capture files and any binary fixtures are never touched.
+*.pcap binary
+*.pcapng binary
+*.png binary
+*.jpg binary
+*.gif binary
+*.ico binary
+*.pdf binary
+
+# Keep the linguist language statistics honest: this is a Python project,
+# not a shell or batch one.
+*.sh linguist-language=Shell
