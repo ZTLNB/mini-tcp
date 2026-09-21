@@ -15,14 +15,13 @@ import unittest
 sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
 from minitcp.net.tcp import (  # noqa: E402
-    CLOSED,
     CLOSE_WAIT,
+    CLOSED,
     ESTABLISHED,
     FIN_WAIT_1,
     FIN_WAIT_2,
     LAST_ACK,
     LISTEN,
-    SYN_RECEIVED,
     SYN_SENT,
     TIME_WAIT,
     TCPConnection,

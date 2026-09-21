@@ -131,7 +131,7 @@ def run_simulated(loss: float) -> int:
 
 def run_real(device: str, ip: str, netmask: str) -> int:
     try:
-        from minitcp.link.tun import TunLink, TUN_AVAILABLE
+        from minitcp.link.tun import TUN_AVAILABLE, TunLink
     except ImportError as exc:
         print("cannot import the TAP backend: %s" % exc, file=sys.stderr)
         return 2

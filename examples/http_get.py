@@ -67,7 +67,7 @@ def main() -> int:
         return 2
 
     try:
-        from minitcp.link.tun import TunLink, TUN_AVAILABLE
+        from minitcp.link.tun import TUN_AVAILABLE, TunLink
     except ImportError as exc:
         print("cannot import the TAP backend: %s" % exc, file=sys.stderr)
         return 2

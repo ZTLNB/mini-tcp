@@ -41,7 +41,7 @@ from collections.abc import Callable
 
 from .buffer import ReceiveQueue, SendQueue
 from .congestion import RenoCongestion
-from .retransmit import RTOEstimator, RetransmitQueue
+from .retransmit import RetransmitQueue, RTOEstimator
 from .segment import (
     FLAG_ACK,
     FLAG_FIN,
@@ -51,10 +51,10 @@ from .segment import (
     TCPOptions,
     TCPSegment,
 )
-from .seqno import seq_add, seq_diff, seq_ge, seq_gt, seq_lt
+from .seqno import seq_add, seq_ge, seq_gt, seq_lt
 from .state import (
-    CLOSED,
     CLOSE_WAIT,
+    CLOSED,
     CLOSING,
     ESTABLISHED,
     FIN_WAIT_1,

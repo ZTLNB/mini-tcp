@@ -9,7 +9,7 @@ from .congestion import (
 )
 from .connection import DEFAULT_MSS, DEFAULT_WINDOW, TCPConnection, TCPStateError
 from .reorder import ReorderQueue
-from .retransmit import RTOEstimator, OutstandingSegment, RetransmitQueue
+from .retransmit import OutstandingSegment, RetransmitQueue, RTOEstimator
 from .segment import (
     FLAG_ACK,
     FLAG_CWR,
@@ -40,8 +40,9 @@ from .seqno import (
     seq_min,
 )
 from .state import (
-    CLOSED,
+    ALL_STATES,
     CLOSE_WAIT,
+    CLOSED,
     CLOSING,
     ESTABLISHED,
     FIN_WAIT_1,
@@ -51,7 +52,6 @@ from .state import (
     SYN_RECEIVED,
     SYN_SENT,
     TIME_WAIT,
-    ALL_STATES,
     is_closed,
     is_synchronised,
 )

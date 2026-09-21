@@ -108,7 +108,9 @@ class VirtualWire:
 
         with self._lock:
             self.transmitted += 1
-            peers = [l for l in self._links if l is not sender and l.is_up]
+            peers = [
+                link for link in self._links if link is not sender and link.is_up
+            ]
 
         if not peers:
             return

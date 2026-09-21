@@ -51,5 +51,12 @@ class Link(ABC):
     def recv_frame(self, timeout: float | None = None) -> bytes | None:
         """Return the next inbound frame, or ``None`` on timeout."""
 
+    @abstractmethod
     def close(self) -> None:
-        """Release any resources held by the link."""
+        """Release any resources held by the link.
+
+        Abstract rather than a no-op default: every link owns something that
+        has to be given back (a socket, a file descriptor, a thread).  Leaving
+        the base empty makes "forgot to implement close" a silent leak instead
+        of an error at class-definition time.
+        """

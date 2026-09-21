@@ -23,7 +23,7 @@ import time
 from collections import deque
 
 from .net.ipv4 import ip_to_bytes, ip_to_str
-from .net.tcp.state import CLOSED, is_closed
+from .net.tcp.state import is_closed
 
 __all__ = [
     "AF_INET",

@@ -17,7 +17,6 @@ kernel or a TUN device hands us.
 
 from __future__ import annotations
 
-import struct
 from dataclasses import dataclass
 
 from ..util.byteio import Reader, Writer

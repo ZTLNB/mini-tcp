@@ -128,8 +128,13 @@ def mask_to_prefix(mask: bytes) -> int:
 
 
 def same_subnet(a: bytes, b: bytes, mask: bytes) -> bool:
-    """Whether two addresses share a subnet under *mask*."""
-    return all((x & m) == (y & m) for x, y, m in zip(a, b, mask))
+    """Whether two addresses share a subnet under *mask*.
+
+    ``strict=True`` matters here: without it a mismatched-length argument
+    would be silently truncated by ``zip`` and the function would answer a
+    question nobody asked.  All three inputs are 4-byte IPv4 quantities.
+    """
+    return all((x & m) == (y & m) for x, y, m in zip(a, b, mask, strict=True))
 
 
 # --------------------------------------------------------------------------

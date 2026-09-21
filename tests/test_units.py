@@ -68,14 +68,14 @@ from minitcp.net.tcp import (  # noqa: E402
     FLAG_RST,
     FLAG_SYN,
     MAX_HEADER_LEN,
-    ReceiveQueue,
-    RenoCongestion,
-    ReorderQueue,
-    RTOEstimator,
-    RetransmitQueue,
     SEQ_HALF,
     SEQ_MASK,
     SLOW_START,
+    ReceiveQueue,
+    RenoCongestion,
+    ReorderQueue,
+    RetransmitQueue,
+    RTOEstimator,
     SendQueue,
     TCPOptions,
     TCPSegment,
@@ -94,7 +94,13 @@ from minitcp.net.tcp import (  # noqa: E402
 )
 from minitcp.net.udp import UDPSegment  # noqa: E402
 from minitcp.pcap import LINKTYPE_ETHERNET, PcapWriter  # noqa: E402
-from minitcp.util import Reader, Writer, checksum, transport_checksum, verify  # noqa: E402
+from minitcp.util import (  # noqa: E402
+    Reader,
+    Writer,
+    checksum,
+    transport_checksum,
+    verify,
+)
 
 # Addresses used throughout.  RFC 5737 reserves 192.0.2.0/24 for documentation.
 CLIENT_IP = ip_to_bytes("192.0.2.10")
@@ -1722,7 +1728,7 @@ class TestPcapWriter(unittest.TestCase):
         must be d4 c3 b2 a1 for a little-endian file."""
         with tempfile.TemporaryDirectory() as tmp:
             path = os.path.join(tmp, "capture.pcap")
-            with PcapWriter(path) as writer:
+            with PcapWriter(path):
                 pass
             with open(path, "rb") as handle:
                 self.assertEqual(handle.read(4), b"\xd4\xc3\xb2\xa1")

@@ -20,7 +20,11 @@ import unittest
 sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
 from minitcp.net.arp import ARPPacket  # noqa: E402
-from minitcp.net.ethernet import ETHERTYPE_IPV4, EthernetFrame, mac_from_str  # noqa: E402
+from minitcp.net.ethernet import (  # noqa: E402
+    ETHERTYPE_IPV4,
+    EthernetFrame,
+    mac_from_str,
+)
 from minitcp.net.icmp import ECHO_REQUEST, EchoMessage, ICMPMessage  # noqa: E402
 from minitcp.net.ipv4 import (  # noqa: E402
     PROTO_TCP,
