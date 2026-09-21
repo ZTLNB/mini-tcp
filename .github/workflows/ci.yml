@@ -1,0 +1,88 @@
+name: CI
+
+# Fully offline. The stack is driven through a simulated link in-process, so
+# the suite needs no TUN device, no root and no network -- which is exactly
+# what makes it usable as a CI gate.
+#
+# Python 3.10 is the declared floor (and the floor for `zip(strict=)`, which
+# the IPv4 helpers now rely on). Windows and macOS get one cell each because
+# socket and file-descriptor behaviour is where platforms actually differ.
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+env:
+  RUFF_VERSION: '0.16.8'
+
+jobs:
+  test:
+    name: test (python ${{ matrix.python }} on ${{ matrix.os }})
+    runs-on: ${{ matrix.os }}
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-latest]
+        python: ['3.10', '3.11', '3.12', '3.13']
+        include:
+          - os: windows-latest
+            python: '3.13'
+          - os: macos-latest
+            python: '3.13'
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: ${{ matrix.python }}
+
+      - name: Show the interpreter
+        run: python -VV
+
+      # Tests first: they add the repo root to sys.path themselves, so a
+      # packaging problem cannot mask the test result.
+      - name: Run the test suite
+        run: python -m unittest discover -s tests
+
+      - name: Verify the package installs
+        run: python -m pip install -e .
+
+  lint:
+    name: lint
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.13'
+
+      - name: Install the linter
+        run: python -m pip install "ruff==$RUFF_VERSION"
+
+      # Reads its settings from pyproject.toml, which documents the deferred
+      # rule groups and their counts.
+      - name: ruff
+        run: ruff check .
+
+      # mypy is deliberately NOT enforced here.
+      #
+      # The project ships the "Typing :: Typed" classifier, but `mypy minitcp/`
+      # currently reports 30 errors (concentrated in stack.py, where values
+      # come back as `int | None`). Adding a type gate that is red on arrival
+      # would just teach everyone to ignore CI. The two honest options are to
+      # fix the 30 errors or to drop the classifier -- see the audit report.
+      - name: Note the known typing gap
+        run: |
+          echo "mypy is not enforced yet: 30 errors outstanding in minitcp/."
+          echo "See pyproject.toml [tool.ruff.lint] and the audit report."
